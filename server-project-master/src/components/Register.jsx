@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useEffect, useState }  from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -54,6 +54,18 @@ const Register = () => {
     const [Comment, setComment] = useState("");
     const [Profilepic, setProfilepic] = useState("");
 
+    useEffect (()=>{
+      console.log('렌더링이 완료 되었습니다.');
+      console.log({
+        Email,
+        Password,
+        Birth,
+        Job,
+        Comment,
+        Profilepic
+      });
+    });
+
     const onEmailHandler = (e) => {
       setEmail(e.target.value)
     }
@@ -101,7 +113,11 @@ const Register = () => {
               }),
             }).then((res)=>
                 res.json()
-            ).then(data=>{console.log(data)})
+            ).then(data=>{console.log(data.success);
+              if((data.success) == '1'){
+                alert('중복된 이메일 입니다.');
+              }
+            })
           }}>회원가입</Joinbtn>
           <Cancelbtn><Link to="/LoginPage" style={{ textDecoration: 'none', color: 'black', display:'block' }}>취소</Link></Cancelbtn>
         </Btnbox>

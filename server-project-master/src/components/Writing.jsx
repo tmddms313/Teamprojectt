@@ -81,7 +81,10 @@ const Writing = () => {
           }),
         }).then((res)=>
             res.json()
-        ).then(data=>{console.log(data)})
+        ).then(data=>{console.log(data.success);
+        if((data.success)=='1'){
+            alert('포스팅 실패');
+        }})
     }, []);
   
     const onTitleHandler = (e) => {
